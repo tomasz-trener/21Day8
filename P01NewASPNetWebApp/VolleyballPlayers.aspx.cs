@@ -11,9 +11,11 @@ namespace P01NewASPNetWebApp
     public partial class VolleyballPlayers : System.Web.UI.Page
     {
         public string SampleString { get; set; } 
+        public List<Player> PlayerList { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            PlayerList = new List<Player>();
             string sampleString = "hello";
             // Response.Write(sampleString);
             SampleString = sampleString;
@@ -21,7 +23,7 @@ namespace P01NewASPNetWebApp
             string connectionString =
                 "Server=(localdb)\\mssqllocaldb;Database=VolleyballDatabase;Integrated Security=True;";
 
-            List<Player> list = new List<Player>();
+            
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -29,17 +31,18 @@ namespace P01NewASPNetWebApp
                 connection.Open();
 
                 using (SqlCommand command =
-                    new SqlCommand("SELECT Id, First_Name, Last_Name FROM Players", connection))
+                    new SqlCommand("SELECT Id, First_Name, Last_Name, country FROM Players", connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            list.Add(new Player()
+                            PlayerList.Add(new Player()
                             {
                                 Id = reader.GetInt32(0),
                                 FirstName = reader.GetString(1),
                                 LastName = reader.GetString(2),
+                                Country = reader.GetString(3),
                             });
 
                             //Response.Write($"" +

@@ -25,9 +25,63 @@
             </tr>
         </table>
 
+        <p>Table 1</p>
+        <table>
+
+            <%
+
+                foreach (var p in PlayerList)
+                {
+
+                    if(p.Country.ToLower()=="pol")
+                    { %>  
+                        <tr style="background-color:red">
+            <%      }
+                    else
+                    {  %>  
+                        <tr style="background-color:green">
+           <%       }
+
+                    %>  
+
+                    
+                        <td><%=p.Id %></td>
+                        <td><%=p.FirstName %></td>
+                        <td><%=p.LastName %></td>
+                    </tr>
+
+            <%  
+                }
 
 
+                %>
 
+        </table>
+
+
+        <br />
+        <p>Table 2 </p>
+          <table>
+
+            <%
+
+                foreach (var p in PlayerList)
+                {
+
+                %>
+                      <tr style="background-color:<%= p.HTMLColor %>">
+                        <td><%=p.Id %></td>
+                        <td><%=p.FirstName %></td>
+                        <td><%=p.LastName %></td>
+                    </tr>
+
+            <%  
+                }
+
+
+                %>
+
+        </table>
     </form>
 </body>
 </html>
